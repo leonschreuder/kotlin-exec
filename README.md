@@ -1,2 +1,3 @@
-# kotlin-shell
-use the ProcessBuilder from a nice kotlin api
+# kotlin-exec
+
+Use Javas ProcessBuilder, but from a nice kotlin api
