@@ -7,7 +7,7 @@ import java.io.IOException
  * Class returned once the command is finished. The exit code is always set, stdout and stderr only
  * if capturing was configured
  */
-data class ShellResult(val exitCode: Int, val stdout: String? = null, val stderr: String? = null)
+data class ExecResult(val exitCode: Int, val stdout: String? = null, val stderr: String? = null)
 
 /**
  * Run a system level command, mimicking normal shell behaviour as closely as possible. That means
@@ -25,7 +25,7 @@ fun exec(
     captureOutput: Boolean = false,
     workingDir: File = File("."),
     redirectErrToOut: Boolean = false
-): ShellResult {
+): ExecResult {
     try {
         val process =
             ProcessBuilder(*cmd.splitWords().toTypedArray())
@@ -50,18 +50,18 @@ fun exec(
 
         val exitCode = process.waitFor()
         if (captureOutput) {
-            return ShellResult(
+            return ExecResult(
                 exitCode,
                 process.inputStream.bufferedReader().readText(),
                 process.errorStream.bufferedReader().readText()
             )
         } else {
-            return ShellResult(exitCode)
+            return ExecResult(exitCode)
         }
     } catch (e: IOException) {
         e.printStackTrace()
     }
-    return ShellResult(1)
+    return ExecResult(1)
 }
 
 /** Tries to split the string into words, but also support grouping commands in quotes */

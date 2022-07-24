@@ -89,7 +89,13 @@ class ExecTest {
     @Test
     fun should_support_quoting() {
 
-        val result = exec("echo 'something here'", workingDir = tmpDir, captureOutput = true, stdIn = "input")
+        val result =
+            exec(
+                "echo 'something here'",
+                workingDir = tmpDir,
+                captureOutput = true,
+                stdIn = "input"
+            )
 
         assertEquals("something here\n", result.stdout)
         assertEquals("", result.stderr)
