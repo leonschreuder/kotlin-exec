@@ -17,11 +17,13 @@ dependencies {
 
 group = "io.github.leonschreuder"
 
-version = "1.0.0"
+version = "1.0.1"
 
 spotless { kotlin { ktfmt().kotlinlangStyle() } }
 
 java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
     withSourcesJar()
     withJavadocJar()
 }
@@ -41,6 +43,18 @@ publishing {
                         name.set("MIT License")
                         url.set("https://tldrlegal.com/license/mit-license")
                     }
+                }
+                developers {
+                    developer {
+                        id.set("leonschreuder")
+                        name.set("Leon Schreuder")
+                        email.set("leon.schreuder@proton.me")
+                    }
+                }
+                scm {
+                    connection.set("scm:git:git://github.com/leonschreuder/kotlin-exec.git")
+                    connection.set("scm:git:ssh://github.com/leonschreuder/kotlin-exec.git" )
+                    url.set("https://github.com/leonschreuder/kotlin-exec")
                 }
             }
         }
@@ -66,49 +80,3 @@ publishing {
 signing {
     sign(publishing.publications["mavenJava"])
 }
-
-/*
- publishing {
-     publications {
-         mavenJava(MavenPublication) {
-                     artifactId = '<libraryname>'
-                                 from components.java
-
-             pom {
-                 name = '<libraryname>'
-                 description = '<description>'
-                 url = '<library/project url>'
-                 licenses {
-                     license {
-                         name = '<Your license>'
-                         url = '<license-url>'
-                     }
-                 }
-                 developers {
-                     developer {
-                         id = '<developerID>'
-                         name = 'Developer Name'
-                         email = 'Developer email'
-                     }
-                 }
-                 scm {
-                 connection = 'scm:git:git://github.com/CuriousNikhil/simplepoller.git'
-                     developerConnection = 'scm:git:ssh://github.com/CuriousNikhil/simplepoller.git'
-                     url = 'https://github.com/CuriousNikhil/simplepoller'
-                 }
-             }
-         }
-     }    repositories {
-         maven {
-
-             credentials {
-                 username = "$NEXUS_USERNAME"
-                 password = "$NEXUS_PASSWORD"
-             }
-
-             name = "<name anything>"
-             url = 'https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/'
-         }
-     }
- }
-  */
