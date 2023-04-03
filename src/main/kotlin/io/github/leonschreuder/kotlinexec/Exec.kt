@@ -63,24 +63,3 @@ fun exec(
     }
     return ExecResult(1)
 }
-
-/** Tries to split the string into words, but also support grouping commands in quotes */
-internal fun String.splitWords(): List<String> {
-    val matchList: MutableList<String> = ArrayList()
-    val regex = ("[^\\s\"']+|\"([^\"]*)\"|'([^']*)'").toRegex()
-    val iterator = regex.findAll(this).iterator()
-    while (iterator.hasNext()) {
-        val match = iterator.next()
-        if (match.groups[1] != null) {
-            // Add double-quoted string without the quotes
-            matchList.add(match.groupValues[1])
-        } else if (match.groups[2] != null) {
-            // Add single-quoted string without the quotes
-            matchList.add(match.groupValues[2])
-        } else {
-            // Add unquoted word
-            matchList.add(match.groupValues[0])
-        }
-    }
-    return matchList
-}

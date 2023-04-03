@@ -100,13 +100,4 @@ class ExecTest {
         assertEquals("something here\n", result.stdout)
         assertEquals("", result.stderr)
     }
-
-    @Test
-    fun should_split_words() {
-        assertEquals(listOf("one", "two"), "one two".splitWords())
-        assertEquals(listOf("one", "two three"), "one 'two three'".splitWords())
-        assertEquals(listOf("one", "two three"), "one \"two three\"".splitWords())
-        // TODO:
-        // assertEquals(listOf("one", "two 'three'"), "one \"two \\\"three\\\"\"".splitWords())
-    }
 }
